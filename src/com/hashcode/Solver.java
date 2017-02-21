@@ -2,22 +2,24 @@ package com.hashcode;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.Random;
 
 public class Solver
 {
     Reader reader;
     
-    ArrayList<Slice> slices = new ArrayList<Slice>();
-
+    ArrayList<Slice> slices;
+    
     public Solver(Reader reader)
     {
         super();
         this.reader = reader;
     }
     
-    public void solve()
+    public double solve()
     {
+        slices = new ArrayList<Slice>();
+
         int min = reader.info[2]*2;
         int max = reader.info[3];
         
@@ -40,6 +42,8 @@ public class Solver
         }
         
 
+        Collections.shuffle(templates, new Random(System.currentTimeMillis()));
+//                       
 //        Collections.sort(templates, new Comparator<int[]>()
 //        {
 //
@@ -148,10 +152,14 @@ public class Solver
             System.out.println(slice);
         }
         
+        double p = (100 *totalArea/(w * h));
+        System.out.println("score " + totalArea + ", max: " + (w * h) + ", " + p + "%");
         
-        System.out.println("score " + totalArea + ", max: " + (w * h) + ", " + (100 *totalArea/(w * h)) + "%");
+        return p;
         
     }
+    
+    
 
     private boolean testAt(int p, int q, int nOfR, int nOfC, byte[][] array, boolean[][] used)
     {
