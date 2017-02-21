@@ -40,28 +40,28 @@ public class Solver
         }
         
 
-        Collections.sort(templates, new Comparator<int[]>()
-        {
-
-            @Override
-            public int compare(int[] o1, int[] o2)
-            {
-                double prod1 = o1[0] * o1[1];
-                double sum1 = Math.max(o1[0] , o1[1]);
-                double score1 = prod1 / sum1;
-                
-                
-                double prod2 = o2[0] * o2[1];
-                double sum2 = Math.max(o2[0] , o2[1]);
-                double score2 = prod2 / sum2;
-                
-                if(score1 > score2)
-                    return -1;
-                else if(score2 > score1)
-                    return 1;
-                else return 0;
-            } 
-        });
+//        Collections.sort(templates, new Comparator<int[]>()
+//        {
+//
+//            @Override
+//            public int compare(int[] o1, int[] o2)
+//            {
+//                double prod1 = o1[0] * o1[1];
+//                double sum1 = Math.max(o1[0] , o1[1]);
+//                double score1 = prod1 / sum1;
+//                
+//                
+//                double prod2 = o2[0] * o2[1];
+//                double sum2 = Math.max(o2[0] , o2[1]);
+//                double score2 = prod2 / sum2;
+//                
+//                if(score1 > score2)
+//                    return -1;
+//                else if(score2 > score1)
+//                    return 1;
+//                else return 0;
+//            } 
+//        });
         
         System.out.println(count);
         
@@ -81,6 +81,48 @@ public class Solver
             
             int nOfR = pair[0];
             int nOfC = pair[1];
+
+            int selP =0,selQ=0;
+            int bestTotal =0;
+//            for(int p=0;p<nOfR;p++)
+//            {
+//                for(int q=0;q<nOfC;q++)
+//                {
+//                    boolean [][] usedLocal = new boolean[h][w];
+//                    int total =0;
+//                    for(int i=p;i<h-nOfR ;i++)
+//                    {
+//                        for(int j=q;j<w-nOfC ;j++)
+//                        {
+//                            if(testAt(i, j, nOfR, nOfC, reader.array, usedLocal))
+//                            {
+//                                Slice slice  = new Slice(j, i,  j+nOfC, i + nOfR);
+//                                total+=slice.area();
+//                            }
+//                        }
+//                    }
+//                    
+//                    
+//                    if(total>bestTotal)
+//                    {
+//                        selP = p;
+//                        selQ = q;
+//                    }
+//                }
+//            }
+            
+            for(int i=selP;i<h-nOfR;i++)
+            {
+                for(int j=selQ;j<w-nOfC;j++)
+                {
+                    if(testAt(i, j, nOfR, nOfC, reader.array, used))
+                    {
+                        slices.add(new Slice(j, i,  j+nOfC, i + nOfR));
+                        setUsedAt(i, j, nOfR, nOfC, reader.array, used);
+                    }
+                }
+            }
+            
             
             for(int i=0;i<h-nOfR;i++)
             {
