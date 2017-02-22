@@ -115,18 +115,18 @@ public class Solver
 //                }
 //            }
             
-            for(int i=selP;i<h-nOfR;i++)
-            {
-                for(int j=selQ;j<w-nOfC;j++)
-                {
-                    if(testAt(i, j, nOfR, nOfC, reader.array, used))
-                    {
-                        slices.add(new Slice(j, i,  j+nOfC, i + nOfR));
-                        setUsedAt(i, j, nOfR, nOfC, reader.array, used);
-                    }
-                }
-            }
-            
+//            for(int i=selP;i<h-nOfR;i++)
+//            {
+//                for(int j=selQ;j<w-nOfC;j++)
+//                {
+//                    if(testAt(i, j, nOfR, nOfC, reader.array, used))
+//                    {
+//                        slices.add(new Slice(j, i,  j+nOfC-1, i + nOfR-1));
+//                        setUsedAt(i, j, nOfR, nOfC, reader.array, used);
+//                    }
+//                }
+//            }
+//            
             
             for(int i=0;i<h-nOfR;i++)
             {
@@ -224,7 +224,7 @@ public class Solver
         @Override
         public String toString()
         {
-            return "" + sx + " " + sy + " " + ex + " " + ey;
+            return "" + sy + " " + sx + " " + (ey-1) + " " + (ex-1);
         }
         
         public int area()
